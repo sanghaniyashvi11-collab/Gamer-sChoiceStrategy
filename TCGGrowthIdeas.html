@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gamer's Choice — Demographic Expansion Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0D0D0F;
+  --surface: #161619;
+  --surface2: #1E1E23;
+  --border: rgba(255,255,255,0.08);
+  --border-bright: rgba(255,255,255,0.16);
+  --text: #F0EEE9;
+  --muted: rgba(240,238,233,0.5);
+  --dim: rgba(240,238,233,0.3);
+  --accent: #7B6FE8;
+  --accent-glow: rgba(123,111,232,0.15);
+  --accent-dim: rgba(123,111,232,0.08);
+  --amber: #E8A23A;
+  --amber-dim: rgba(232,162,58,0.1);
+  --teal: #3ABFA8;
+  --pink: #D4537E;
+  --green: #4CAF82;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,15,0.85);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);padding:0 2rem}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.08em;color:var(--text);text-transform:uppercase}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;letter-spacing:0.02em}
+.nav-links a:hover{color:var(--text)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 6rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 60%,rgba(123,111,232,0.12) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;justify-content:center}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:32px;height:0.5px;background:var(--accent);opacity:0.5}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.5rem;max-width:900px}
+.hero-title em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:clamp(1rem,2vw,1.2rem);color:var(--muted);max-width:580px;line-height:1.7;margin-bottom:2.5rem}
+.hero-stats{display:flex;gap:2px;flex-wrap:wrap;justify-content:center;margin-bottom:3rem}
+.hero-stat{padding:0.75rem 1.5rem;background:var(--surface);border:0.5px solid var(--border);font-size:13px}
+.hero-stat:first-child{border-radius:8px 0 0 8px}
+.hero-stat:last-child{border-radius:0 8px 8px 0}
+.hero-stat strong{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--amber);display:block}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.8rem 2rem;border-radius:6px;text-decoration:none;transition:opacity 0.2s}
+.hero-cta:hover{opacity:0.85}
+
+/* SECTION COMMONS */
+section{padding:6rem 2rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;line-height:1.15;letter-spacing:-0.02em;margin-bottom:1rem}
+.section-body{font-size:15px;color:var(--muted);max-width:620px;line-height:1.75}
+
+/* THESIS */
+.thesis{background:var(--surface);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border)}
+.thesis-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.thesis-quote{font-family:'Syne',sans-serif;font-size:clamp(1.1rem,2.2vw,1.6rem);font-weight:600;line-height:1.45;letter-spacing:-0.01em;border-left:3px solid var(--accent);padding-left:1.5rem}
+.thesis-quote em{font-style:normal;color:var(--accent)}
+.thesis-right p{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:1rem}
+.thesis-right p:last-child{margin-bottom:0}
+
+/* IDEAS */
+.ideas-grid{display:grid;gap:1.5px;margin-top:3rem}
+.idea-card{background:var(--surface);border:0.5px solid var(--border);border-radius:0;overflow:hidden;transition:border-color 0.25s}
+.idea-card:first-child{border-radius:12px 12px 0 0}
+.idea-card:last-child{border-radius:0 0 12px 12px}
+.idea-card:hover{border-color:var(--border-bright)}
+.idea-header{display:grid;grid-template-columns:auto 1fr auto;gap:1.5rem;align-items:center;padding:1.75rem 2rem;cursor:pointer}
+.idea-num{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.15em;color:var(--dim);width:24px}
+.idea-meta{}
+.idea-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.rarity{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:2px 8px;border-radius:4px}
+.rarity-secret{background:rgba(212,83,126,0.15);color:#D4537E;border:0.5px solid rgba(212,83,126,0.3)}
+.rarity-ultra{background:rgba(123,111,232,0.12);color:#9B90F0;border:0.5px solid rgba(123,111,232,0.25)}
+.rarity-rare{background:rgba(232,162,58,0.1);color:#E8A23A;border:0.5px solid rgba(232,162,58,0.25)}
+.rarity-holo{background:rgba(58,191,168,0.1);color:#3ABFA8;border:0.5px solid rgba(58,191,168,0.25)}
+.idea-title{font-family:'Syne',sans-serif;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;letter-spacing:-0.01em}
+.idea-oneliner{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.5}
+.idea-toggle{width:28px;height:28px;border-radius:50%;border:0.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;color:var(--muted)}
+.idea-toggle svg{transition:transform 0.3s}
+.idea-card.open .idea-toggle{background:var(--accent);border-color:var(--accent);color:white}
+.idea-card.open .idea-toggle svg{transform:rotate(45deg)}
+.idea-body{display:none;padding:0 2rem 2rem 2rem;border-top:0.5px solid var(--border)}
+.idea-card.open .idea-body{display:block}
+.idea-body-inner{padding-top:2rem}
+
+/* IDEA BODY COMPONENTS */
+.insight-box{background:var(--accent-dim);border:0.5px solid rgba(123,111,232,0.2);border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:1.5rem}
+.insight-box p{font-size:14px;color:rgba(155,144,240,0.9);line-height:1.7}
+.proven-box{background:rgba(58,191,168,0.06);border:0.5px solid rgba(58,191,168,0.2);border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:1.5rem}
+.proven-box p{font-size:14px;color:rgba(58,191,168,0.9);line-height:1.7}
+.warn-box{background:rgba(232,162,58,0.06);border:0.5px solid rgba(232,162,58,0.2);border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:1.5rem}
+.warn-box p{font-size:14px;color:rgba(232,162,58,0.85);line-height:1.7}
+.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:1rem}
+.sub-card{background:var(--surface2);border:0.5px solid var(--border);border-radius:8px;padding:1.25rem}
+.sub-card h4{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem}
+.sub-card ul{padding-left:1rem;display:flex;flex-direction:column;gap:6px}
+.sub-card li{font-size:13px;color:var(--muted);line-height:1.6}
+.test-box{background:var(--surface2);border:0.5px solid var(--border);border-radius:8px;padding:1.25rem;margin-top:1rem}
+.test-box h4{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem}
+.test-steps{display:flex;flex-direction:column;gap:0}
+.test-step{display:flex;gap:1rem;padding:0.75rem 0;border-bottom:0.5px solid var(--border)}
+.test-step:last-child{border-bottom:none}
+.step-dot{width:20px;height:20px;border-radius:50%;background:var(--amber-dim);border:0.5px solid rgba(232,162,58,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--amber);flex-shrink:0;margin-top:2px}
+.step-text h5{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.step-text p{font-size:12px;color:var(--muted);line-height:1.55}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;margin-bottom:1.5rem}
+.mini-stat{background:var(--surface2);border:0.5px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
+.mini-stat .mn{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:2px}
+.mini-stat .ml{font-size:10px;color:var(--muted);line-height:1.4}
+
+/* FOOTER */
+footer{padding:3rem 2rem;text-align:center}
+.footer-inner{max-width:1100px;margin:0 auto;border-top:0.5px solid var(--border);padding-top:2rem}
+.footer-logo{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);margin-bottom:0.5rem}
+footer p{font-size:12px;color:var(--dim)}
+
+/* FLOATING CARD DECORATION */
+.card-float{position:absolute;border:0.5px solid rgba(123,111,232,0.2);border-radius:8px;background:rgba(22,22,25,0.8);backdrop-filter:blur(8px);padding:10px 14px;font-size:11px;pointer-events:none;white-space:nowrap}
+.cf1{top:22%;left:5%;animation:cfloat 6s ease-in-out infinite}
+.cf2{top:35%;right:4%;animation:cfloat 7s ease-in-out infinite 1s}
+.cf3{bottom:28%;left:8%;animation:cfloat 8s ease-in-out infinite 2s}
+@keyframes cfloat{0%,100%{transform:translateY(0px)}50%{transform:translateY(-10px)}}
+.cf-rarity{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:3px}
+.cf-name{font-weight:500;color:var(--text)}
+.cf-val{color:var(--amber);font-size:10px;margin-top:2px}
+
+/* OVERVIEW BAR */
+.overview-bar{display:flex;gap:1.5px;margin-top:2rem;overflow:hidden;border-radius:8px}
+.ov-seg{flex:1;padding:1rem;background:var(--surface2);text-align:center;border:0.5px solid var(--border)}
+.ov-seg h4{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px}
+.ov-seg p{font-size:11px;color:var(--muted);line-height:1.4}
+
+@media(max-width:768px){
+  .thesis-inner{grid-template-columns:1fr;gap:2rem}
+  .hero{padding:6rem 1.5rem 4rem}
+  nav{padding:0 1rem}
+  .nav-links{display:none}
+  section{padding:4rem 1.5rem}
+  .idea-header{grid-template-columns:auto 1fr auto;gap:1rem;padding:1.25rem}
+  .hero-stats{gap:4px}
+  .hero-stat{padding:0.6rem 1rem}
+  .cf1,.cf2,.cf3{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Gamer's <span>Choice</span></div>
+    <ul class="nav-links">
+      <li><a href="#thesis">Thesis</a></li>
+      <li><a href="#ideas">The four ideas</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="mailto:sanghaniyashvi11@gmail.com" style="color:var(--accent)">Get in touch</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="card-float cf1">
+    <div class="cf-rarity" style="color:#D4537E">Secret rare</div>
+    <div class="cf-name">Female collector market</div>
+    <div class="cf-val">↑ 300% in card grading, 2025</div>
+  </div>
+  <div class="card-float cf2">
+    <div class="cf-rarity" style="color:#9B90F0">Ultra rare</div>
+    <div class="cf-name">Sneaker resale × TCG</div>
+    <div class="cf-val">$10B+ GMV — same psychology</div>
+  </div>
+  <div class="card-float cf3">
+    <div class="cf-rarity" style="color:#E8A23A">Holo rare</div>
+    <div class="cf-name">Creator economy cards</div>
+    <div class="cf-val">The Michelin Star model</div>
+  </div>
+
+  <div class="hero-eyebrow">Strategic expansion brief</div>
+  <h1 class="hero-title">The gap isn't in the psychology.<br><em>It's in the IP.</em></h1>
+  <p class="hero-sub">TCG buyers are 72% male. But the mechanics that make trading cards work — nostalgia, community, FOMO, exclusivity, the suspense of a reveal — are completely universal. Four hypotheses about how Gamer's Choice can reach the audiences it isn't reaching yet.</p>
+
+  <div class="hero-stats">
+    <div class="hero-stat"><strong>72%</strong>TCG market is male</div>
+    <div class="hero-stat"><strong>300%</strong>Rise in female card grading</div>
+    <div class="hero-stat"><strong>$10B+</strong>Sneaker resale GMV 2025</div>
+    <div class="hero-stat"><strong>4</strong>Testable hypotheses</div>
+  </div>
+
+  <a href="#ideas" class="hero-cta">See the four ideas ↓</a>
+</section>
+
+<section class="thesis" id="thesis">
+  <div class="thesis-inner">
+    <div class="thesis-quote">The gap isn't in the mechanics. It's in the IP. Nobody has built a product that delivers the <em>same TCG experience</em> wrapped around content that resonates with audiences Gamer's Choice isn't currently reaching.</div>
+    <div class="thesis-right">
+      <p>The psychological drivers that make trading cards work — scarcity, community, suspense, nostalgia, status — are not genre-specific. They are human. A limited drop feels the same whether you're waiting for a Pokémon Secret Rare or a Supreme collab.</p>
+      <p>What changes is the IP layer. The question isn't whether new audiences can get hooked by collectible mechanics. They already are. The question is: what IP hooks them?</p>
+      <p>These four ideas are hypotheses about four different IP layers Gamer's Choice could own — each with a 30-day test that validates or kills the idea before committing meaningful resources.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ideas">
+  <div class="section-inner">
+    <div class="section-label">The four ideas</div>
+    <h2 class="section-title">Four hypotheses. Four 30-day tests.</h2>
+    <p class="section-body">Each idea is presented as a card — because the format should reflect the content. Click any card to expand the full brief, market data, mechanics, and test design.</p>
+
+    <div class="overview-bar">
+      <div class="ov-seg"><h4 style="color:#D4537E">Idea 1</h4><p>Luxury brands</p></div>
+      <div class="ov-seg"><h4 style="color:#9B90F0">Idea 2</h4><p>Creator economy</p></div>
+      <div class="ov-seg"><h4 style="color:#E8A23A">Idea 3</h4><p>Food culture</p></div>
+      <div class="ov-seg"><h4 style="color:#3ABFA8">Idea 4</h4><p>Sneaker universe</p></div>
+    </div>
+
+    <div class="ideas-grid" style="margin-top:1.5px">
+
+      <!-- IDEA 1 -->
+      <div class="idea-card" id="card-1">
+        <div class="idea-header" onclick="toggle(1)">
+          <div class="idea-num">01</div>
+          <div class="idea-meta">
+            <div class="idea-eyebrow">
+              <span class="rarity rarity-secret">Secret rare</span>
+            </div>
+            <div class="idea-title">Luxury brand collectible cards</div>
+            <div class="idea-oneliner">Partner with fashion houses to produce limited-edition cards auctioned live on Whatnot.</div>
+          </div>
+          <div class="idea-toggle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="idea-body">
+          <div class="idea-body-inner">
+            <div class="stats-row">
+              <div class="mini-stat"><div class="mn" style="color:#D4537E">85%</div><div class="ml">Luxury purchases influenced by female buyers globally</div></div>
+              <div class="mini-stat"><div class="mn" style="color:#9B90F0">500</div><div class="ml">Cards = mathematically guaranteed scarcity forever</div></div>
+              <div class="mini-stat"><div class="mn" style="color:#E8A23A">LV ×<br>Murakami</div><div class="ml">Already released collectible trading cards, SS25</div></div>
+              <div class="mini-stat"><div class="mn" style="color:#3ABFA8">41%</div><div class="ml">Higher collector engagement from brand collaborations</div></div>
+            </div>
+            <div class="insight-box"><p>A card carrying an LV monogram, limited to 500 copies, auctioned live on Whatnot, is not a trading card — it is a wearable-equivalent collectible. The buyer is not just collecting. They are signalling. That is what luxury brands sell. Gamer's Choice already has the live auction infrastructure. The product just needs the IP.</p></div>
+            <div class="two-col">
+              <div class="sub-card">
+                <h4>Why the partnership works</h4>
+                <ul>
+                  <li>Luxury brands need new touchpoints with younger demographics — a Whatnot collab reaches audiences no magazine ad does</li>
+                  <li>Cards are lower risk than a physical product line — no inventory, no manufacturing complexity for the brand</li>
+                  <li>Scarcity is mathematically contractual — a print run of 250 cards is a commitment, not a hope</li>
+                  <li>Live auction format creates the exact FOMO and status dynamics luxury thrives on</li>
+                  <li>Louis Vuitton × Takashi Murakami already released collectible trading cards in Spring/Summer 2025 — concept is validated at the highest brand level</li>
+                </ul>
+              </div>
+              <div class="sub-card">
+                <h4>Why buyers want this</h4>
+                <ul>
+                  <li>Rare LV bags depreciate through use. A rare LV card in a PSA slab can appreciate — a genuinely new value proposition for fashion buyers</li>
+                  <li>Brand loyalty in luxury is the strongest in any consumer category</li>
+                  <li>Winning a live auction carries social status within the community — the chat witnesses the moment</li>
+                  <li>Physical, serialised, authenticated — none of the ephemerality of digital fashion items</li>
+                </ul>
+              </div>
+            </div>
+            <div class="test-box">
+              <h4>The 30-day test — no LV required</h4>
+              <div class="test-steps">
+                <div class="test-step"><div class="step-dot">1</div><div class="step-text"><h5>Commission 3 independent micro-luxury artists</h5><p>50 numbered collectible cards each. Beautiful, serialised, not tied to any TCG game mechanics.</p></div></div>
+                <div class="test-step"><div class="step-dot">2</div><div class="step-text"><h5>Auction live on a dedicated Whatnot drop</h5><p>Measure: sell-through rate, average winning bid, chat engagement, new-to-platform female buyer %.</p></div></div>
+                <div class="test-step"><div class="step-dot">3</div><div class="step-text"><h5>Use results to open a real brand conversation</h5><p>Data beats a pitch deck. A successful test is the credibility needed to approach a heritage house.</p></div></div>
+              </div>
+            </div>
+            <div class="warn-box" style="margin-top:1rem"><p>Realistic sequencing: don't say "we partner with Louis Vuitton." Say "we validate with independent designers first, then use those results to approach heritage brands." That one sentence shows strategic maturity — the difference between a strategist and an operator.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IDEA 2 -->
+      <div class="idea-card" id="card-2">
+        <div class="idea-header" onclick="toggle(2)">
+          <div class="idea-num">02</div>
+          <div class="idea-meta">
+            <div class="idea-eyebrow">
+              <span class="rarity rarity-ultra">Ultra rare</span>
+              <span style="font-size:11px;color:#4CAF82;font-weight:500">Strongest strategic fit</span>
+            </div>
+            <div class="idea-title">Creator economy card ecosystem</div>
+            <div class="idea-oneliner">The Michelin Star model applied to live commerce. Build a system where creators compete to earn a Gamer's Choice card.</div>
+          </div>
+          <div class="idea-toggle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="idea-body">
+          <div class="idea-body-inner">
+            <div class="insight-box"><p><strong style="color:#9B90F0">The Michelin Star analogy:</strong> Michelin didn't chase restaurants. They built a system where restaurants competed to be in the guide — which made the guide more valuable, which made restaurants compete harder. The flywheel runs itself. A creator card ecosystem works identically: if having a Gamer's Choice card means something to a creator's community, creators will market Gamer's Choice for free to earn one.</p></div>
+            <div class="two-col">
+              <div class="sub-card">
+                <h4>How the flywheel works</h4>
+                <ul>
+                  <li>Gamer's Choice hand-picks 5 creators and produces limited-edition numbered card series for each</li>
+                  <li>Co-hosted live auction drops — creator's audience floods into the Whatnot stream</li>
+                  <li>Other creators see peers with cards and want one — they start making content about Gamer's Choice</li>
+                  <li>Having a card becomes a community status signal — proof your audience is real and passionate</li>
+                  <li>Gamer's Choice publishes a Creator Card Index — quarterly ranking by card sale value. Creators compete on a leaderboard</li>
+                </ul>
+              </div>
+              <div class="sub-card">
+                <h4>Why this reaches female audiences</h4>
+                <ul>
+                  <li>The creator economy skews heavily female — beauty, lifestyle, cooking, and fashion creators command the largest followings</li>
+                  <li>Fan communities around creators are the most passionate consumer groups online — they buy to belong</li>
+                  <li>A card tied to a creator someone follows obsessively carries emotional value no TCG game card can replicate</li>
+                  <li>Collecting motivation is identity — "I was there for the first drop" — more durable than any gameplay mechanic</li>
+                </ul>
+              </div>
+            </div>
+            <div class="test-box">
+              <h4>The 30-day test</h4>
+              <div class="test-steps">
+                <div class="test-step"><div class="step-dot">1</div><div class="step-text"><h5>Identify 2 mid-tier creators (100K–500K followers)</h5><p>Engagement rate matters more than follower count. Look for communities that are tight, active, and gift-buying.</p></div></div>
+                <div class="test-step"><div class="step-dot">2</div><div class="step-text"><h5>Produce 50 numbered cards each, co-host a live drop</h5><p>Creator goes live on their channel and sends their audience to the Gamer's Choice Whatnot stream.</p></div></div>
+                <div class="test-step"><div class="step-dot">3</div><div class="step-text"><h5>Measure: new buyers, female buyer %, average winning bid</h5><p>If one creator outperforms — that's the template. Examine whether audience crossover to Whatnot was friction.</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IDEA 3 -->
+      <div class="idea-card" id="card-3">
+        <div class="idea-header" onclick="toggle(3)">
+          <div class="idea-num">03</div>
+          <div class="idea-meta">
+            <div class="idea-eyebrow">
+              <span class="rarity rarity-rare">Holo rare</span>
+              <span style="font-size:11px;color:var(--muted)">Long-term hypothesis</span>
+            </div>
+            <div class="idea-title">Food culture collectible cards</div>
+            <div class="idea-oneliner">Cards built around iconic dishes, chefs, and restaurants — targeting the foodie community that already operates on TCG psychology.</div>
+          </div>
+          <div class="idea-toggle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="idea-body">
+          <div class="idea-body-inner">
+            <div class="insight-box"><p>Every psychological driver that makes TCGs work maps directly onto food culture. Nostalgia — food is the most powerful nostalgia trigger that exists. FOMO — limited menus, seasonal dishes, impossible reservations. Community — foodies already gather online to debate and celebrate. Status — the Michelin Star is already the world's most famous collectible rating system. The psychology is already there. The card is just the physical object it was missing.</p></div>
+            <div class="two-col">
+              <div class="sub-card">
+                <h4>TCG mechanics → food culture</h4>
+                <ul>
+                  <li>Nostalgia: a card depicting a beloved dish from a closed restaurant is profoundly emotional</li>
+                  <li>Rarity tiers: common (regional dishes), rare (iconic restaurants), ultra rare (legendary chefs), secret rare (signed chef collab one-of-ones)</li>
+                  <li>FOMO: drops timed to Michelin Guide release day, James Beard Awards week, restaurant anniversaries</li>
+                  <li>Community: foodies already gather to discuss — a card gives them a physical object to rally around</li>
+                </ul>
+              </div>
+              <div class="sub-card">
+                <h4>Why this is a different audience</h4>
+                <ul>
+                  <li>Food content is among the most consumed on every social platform — billions of views</li>
+                  <li>Food influencers command some of the most loyal followings online</li>
+                  <li>Female-skewing audience that currently has no bridge into Gamer's Choice's ecosystem</li>
+                  <li>A signed card from a three-Michelin-star chef who retires has obvious appreciation logic</li>
+                </ul>
+              </div>
+            </div>
+            <div class="test-box">
+              <h4>The 30-day test — zero licensing complexity</h4>
+              <div class="test-steps">
+                <div class="test-step"><div class="step-dot">1</div><div class="step-text"><h5>Produce a "Street Food Legends" series — no brands needed</h5><p>Ramen, tacos, dumplings, pho — iconic unbranded dishes with original commissioned illustration.</p></div></div>
+                <div class="test-step"><div class="step-dot">2</div><div class="step-text"><h5>Partner with one food TikToker (1M+ followers)</h5><p>Co-hosted Whatnot drop. Their audience enters live commerce for the first time through food they love.</p></div></div>
+                <div class="test-step"><div class="step-dot">3</div><div class="step-text"><h5>Measure female buyer % vs Gamer's Choice baseline</h5><p>If the demographic shift is meaningful, the audience crossover thesis is validated. Build from there.</p></div></div>
+              </div>
+            </div>
+            <div class="warn-box" style="margin-top:1rem"><p>Position this as a month two or three experiment rather than a lead initiative. Showing you can prioritise is part of what this role demands — not every good idea needs to go first.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IDEA 4 -->
+      <div class="idea-card" id="card-4">
+        <div class="idea-header" onclick="toggle(4)">
+          <div class="idea-num">04</div>
+          <div class="idea-meta">
+            <div class="idea-eyebrow">
+              <span class="rarity rarity-holo">Market-validated</span>
+              <span style="font-size:11px;color:#3ABFA8;font-weight:500">StockX + LV already proven it</span>
+            </div>
+            <div class="idea-title">Sneaker universe collectible cards</div>
+            <div class="idea-oneliner">Cards that replicate iconic sneaker designs. Same psychology as TCG — nobody has built the bridge into live commerce yet.</div>
+          </div>
+          <div class="idea-toggle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="idea-body">
+          <div class="idea-body-inner">
+            <div class="stats-row">
+              <div class="mini-stat"><div class="mn" style="color:#3ABFA8">$10B+</div><div class="ml">Sneaker resale market GMV 2025</div></div>
+              <div class="mini-stat"><div class="mn" style="color:#9B90F0">34%</div><div class="ml">Sneaker collectors now female — up from 21% in 2019</div></div>
+              <div class="mini-stat"><div class="mn" style="color:#D4537E">42.7%</div><div class="ml">Women's sneaker resale share — up from 1.6% in 2014</div></div>
+              <div class="mini-stat"><div class="mn" style="color:#E8A23A">$187B</div><div class="ml">Global streetwear market 2025</div></div>
+            </div>
+            <div class="proven-box"><p>This is the most market-validated idea of all four. StockX already sells trading cards and sneakers on the same platform. Louis Vuitton × Murakami released official collectible trading cards in Spring/Summer 2025, listed on GOAT. The Sneaker Savant has already launched a sneaker trading card set. The category exists. Nobody has brought it into live commerce at scale. That is the white space.</p></div>
+            <div class="two-col">
+              <div class="sub-card">
+                <h4>Why sneaker culture = TCG culture</h4>
+                <ul>
+                  <li>Limited drops with lottery systems — mirrors TCG set releases with allocation limits exactly</li>
+                  <li>Secondary market resale on StockX/GOAT — same price discovery mechanics as TCGplayer</li>
+                  <li>Professional grading by PSA and Beckett — both worlds already share these exact services</li>
+                  <li>Colourway variants drive premiums — same as alternate art cards commanding 10× over base</li>
+                  <li>Community hype cycles around release day — Sneaker Con mirrors regional TCG tournaments</li>
+                </ul>
+              </div>
+              <div class="sub-card">
+                <h4>What the product looks like</h4>
+                <ul>
+                  <li>Each card features a single iconic sneaker in premium illustration — silhouette, colourway, material detail</li>
+                  <li>Card back carries: original retail price, secondary market peak, pairs produced, cultural significance</li>
+                  <li>Rarity mirrors both worlds: Common → wide releases. Rare → major collabs. Ultra Rare → cultural grails. Secret Rare → never-released samples</li>
+                  <li>Each rare-tier card is serialised: "Card 47 of 100" — scarcity of card mirrors scarcity of the shoe</li>
+                </ul>
+              </div>
+            </div>
+            <div class="test-box">
+              <h4>The 30-day test — no brand licensing required</h4>
+              <div class="test-steps">
+                <div class="test-step"><div class="step-dot">1</div><div class="step-text"><h5>Commission 5 sneaker cards from an independent illustrator</h5><p>Culturally significant shoes depicted without trademarked branding — generic colourways. 50 copies each, hand-numbered.</p></div></div>
+                <div class="test-step"><div class="step-dot">2</div><div class="step-text"><h5>Partner with one sneaker TikToker (200K–1M followers)</h5><p>Co-hosted Whatnot drop. Measure: new buyers, female buyer %, average winning bid, peak viewership.</p></div></div>
+                <div class="test-step"><div class="step-dot">3</div><div class="step-text"><h5>Use results to approach independent designers</h5><p>Salehe Bembury, Joe Freshgoods — both known for community-driven collabs with open licensing conversations. Data first, pitch second.</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background:var(--surface);border-top:0.5px solid var(--border)">
+  <div class="section-inner">
+    <div class="section-label">About this brief</div>
+    <h2 class="section-title">Prepared by Yashvi Sanghani</h2>
+    <p class="section-body" style="margin-bottom:3rem">A strategic expansion brief developed as part of the R&D Specialist candidacy for Gamer's Choice. Each idea is grounded in current market data, built around a testable 30-day hypothesis, and designed to reach demographic audiences the TCG space hasn't fully tapped yet.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-bottom:3rem">
+
+      <div style="background:var(--bg);border:0.5px solid var(--border);border-radius:12px;padding:1.75rem;display:flex;flex-direction:column;gap:1.25rem">
+        <div style="display:flex;align-items:center;gap:1rem">
+          <div style="width:52px;height:52px;border-radius:50%;background:var(--accent-dim);border:0.5px solid rgba(123,111,232,0.25);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--accent);flex-shrink:0">YS</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text)">Yashvi Sanghani</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:1px">Strategy &amp; Transformation Analyst</div>
+          </div>
+        </div>
+        <div style="border-top:0.5px solid var(--border);padding-top:1.25rem;display:flex;flex-direction:column;gap:10px">
+          <a href="mailto:sanghaniyashvi11@gmail.com" style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            sanghaniyashvi11@gmail.com
+          </a>
+          <a href="tel:+12134408703" style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+            +1 (213) 440-8703
+          </a>
+          <a href="https://linkedin.com/in/yashvisanghani" target="_blank" style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            linkedin.com/in/yashvisanghani
+          </a>
+        </div>
+      </div>
+
+      <div style="background:var(--bg);border:0.5px solid var(--border);border-radius:12px;padding:1.75rem">
+        <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem">Background</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:1rem">Strategy &amp; Transformation Analyst with experience across management consulting, growth strategy, and operations — spanning retail, pharma, AI, and growth-stage businesses.</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.75">Delivered $1.2M in cost savings, improved profitability by 20%, and protected $6M in projected revenue through business case development, scenario analysis, and operating model recommendations across multiple engagements.</p>
+      </div>
+
+      <div style="background:var(--bg);border:0.5px solid var(--border);border-radius:12px;padding:1.75rem">
+        <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem">Core strengths</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+            <span style="font-size:13px;color:var(--muted)">Market sizing &amp; competitive analysis</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+            <span style="font-size:13px;color:var(--muted)">Business case development &amp; financial modelling</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+            <span style="font-size:13px;color:var(--muted)">GTM strategy &amp; go-to-market execution</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+            <span style="font-size:13px;color:var(--muted)">Operating model design &amp; process improvement</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+            <span style="font-size:13px;color:var(--muted)">Cross-functional stakeholder alignment</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+            <span style="font-size:13px;color:var(--muted)">Opportunity pipeline management &amp; fast-cycle testing</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="background:var(--accent-dim);border:0.5px solid rgba(123,111,232,0.2);border-radius:12px;padding:1.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">R&D Specialist — Gamer's Choice</div>
+        <div style="font-size:13px;color:rgba(155,144,240,0.8)">This brief represents the kind of structured opportunity analysis and fast-hypothesis thinking I'd bring to this role from day one.</div>
+      </div>
+      <a href="mailto:sanghaniyashvi11@gmail.com" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:white;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.7rem 1.5rem;border-radius:6px;text-decoration:none;white-space:nowrap;transition:opacity 0.2s" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Get in touch →</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Yashvi Sanghani — Strategic Expansion Brief for Gamer's Choice</div>
+    <p>R&D Specialist candidacy · June 2026 · sanghaniyashvi11@gmail.com</p>
+  </div>
+</footer>
+
+<script>
+function toggle(n){
+  const card=document.getElementById('card-'+n);
+  const wasOpen=card.classList.contains('open');
+  document.querySelectorAll('.idea-card').forEach(c=>c.classList.remove('open'));
+  if(!wasOpen)card.classList.add('open');
+}
+</script>
+</body>
+</html>
